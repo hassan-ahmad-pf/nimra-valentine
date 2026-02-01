@@ -89,46 +89,78 @@
   </div>
 
   <script>
-    const noBtn = document.getElementById("no");
+  const noBtn = document.getElementById("no");
+  let attempts = 0;
 
-    noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * 320 - 160;
-      const y = Math.random() * 220 - 110;
-      noBtn.style.transform = `translate(${x}px, ${y}px)`;
-    });
+  const messages = [
+    "NOPE 😝",
+    "Nice try 😏",
+    "Too slow 🏃‍♂️",
+    "Haha nope 😂",
+    "Almost 😜"
+  ];
 
-    function yesClicked() {
-      document.body.innerHTML = `
-        <div style="
-          height:100vh;
-          display:flex;
-          justify-content:center;
-          align-items:center;
-          background:#ff4d6d;
-          color:white;
-          font-family:sans-serif;
-          font-size:38px;
-          text-align:center;
-          padding:20px;
-        ">
-          I KNEW IT 😌💖<br><br>
-          Nimra, you just made me the happiest person alive 🥹<br>
-          Happy Valentine’s 💘
-        </div>
-      `;
+  noBtn.addEventListener("mouseover", () => {
+    attempts++;
+
+    const x = Math.random() * 500 - 250;
+    const y = Math.random() * 300 - 150;
+
+    noBtn.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random()*20 - 10}deg)`;
+    noBtn.innerText = messages[Math.floor(Math.random() * messages.length)];
+
+    // little shake effect
+    noBtn.animate(
+      [
+        { transform: "translateX(0px)" },
+        { transform: "translateX(-5px)" },
+        { transform: "translateX(5px)" },
+        { transform: "translateX(0px)" }
+      ],
+      { duration: 200 }
+    );
+
+    // after too many tries, NO gives up 😂
+    if (attempts >= 7) {
+      noBtn.innerText = "OK FINE 😩";
+      setTimeout(() => {
+        noBtn.style.display = "none";
+      }, 600);
     }
+  });
 
-    // floating hearts
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "💖";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.bottom = "0px";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 6000);
-    }, 400);
-  </script>
+  function yesClicked() {
+    document.body.innerHTML = `
+      <div style="
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:#ff4d6d;
+        color:white;
+        font-family:sans-serif;
+        font-size:36px;
+        text-align:center;
+        padding:20px;
+      ">
+        I KNEW IT 😌💖<br><br>
+        Nimra, you didn’t even try the NO properly 😏<br>
+        Happy Valentine’s 💘
+      </div>
+    `;
+  }
+
+  // floating hearts
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.bottom = "0px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }, 400);
+</script>
 
 </body>
 </html>
