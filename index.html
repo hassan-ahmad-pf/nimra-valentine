@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nimra 💖</title>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 45px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+      animation: pop 1s ease;
+      position: relative;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.6); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 10px;
+      font-size: 34px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: #555;
+    }
+
+    button {
+      padding: 14px 34px;
+      font-size: 18px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    #yes {
+      background-color: #ff4d6d;
+      color: white;
+      margin-right: 20px;
+    }
+
+    #no {
+      background-color: #adb5bd;
+      color: white;
+      position: absolute;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255,77,109,0.4);
+      animation: float 6s infinite ease-in;
+      font-size: 24px;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-600px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Nimra 💖</h1>
+    <p>I have a very serious question 😌<br>Answer wisely.</p>
+    <h1>Will you be my Valentine? 💕</h1>
+
+    <button id="yes" onclick="yesClicked()">YES 💘</button>
+    <button id="no">NO 💔</button>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * 320 - 160;
+      const y = Math.random() * 220 - 110;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    function yesClicked() {
+      document.body.innerHTML = `
+        <div style="
+          height:100vh;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          background:#ff4d6d;
+          color:white;
+          font-family:sans-serif;
+          font-size:38px;
+          text-align:center;
+          padding:20px;
+        ">
+          I KNEW IT 😌💖<br><br>
+          Nimra, you just made me the happiest person alive 🥹<br>
+          Happy Valentine’s 💘
+        </div>
+      `;
+    }
+
+    // floating hearts
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.bottom = "0px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 400);
+  </script>
+
+</body>
+</html>
